@@ -24,7 +24,7 @@ Once the `ProblemSolvingAgent` is instantiated, you can invoke `func solve(probl
 ###### Please note: 
 
 1. Solving a search problem involves heavy computation. It is discouraged to invoke `.solve(_:)` from the main thread synchronously, since it's likely to freeze the user interface for some time (that depends on the device's performance).
-2. When `State` is a reference type, or an array of reference types, `func getResult(action: Action, node: SearchNode<State, Action>) throws -> State` should be defined in a way that it doesn't modify `node.state` directly. A deep copy of the array should be performed instead, and then returned. Favour immutable types instead (refer to Joshua Bloch: Effective Java - Third Edition, Item #17).
+2. When `State` is a reference type, or an array of reference types, `func getResult(action: Action, node: SearchNode<State, Action>) throws -> State` should be defined in a way that it doesn't modify `node.state` directly. When `State` is an array of reference types or a mutable reference type, a deep copy should be performed instead, modified, and then returned, otherwise, if it's an array of value types, a shallow copy suffices, Favour immutable types for `State` generic (refer to Joshua Bloch: Effective Java - Third Edition, Item #17).
 3. When using `AStar`, the `heuristic: (SearchNode<State, Action>) -> Float` closure should be designed to produce its result in `O(1)` time with respect to the size of `$0.state`.
 
 ## Usage Example
@@ -54,6 +54,8 @@ class LighthouseDialsProblem: Problem<[Int], Int> {
     override func getResult(action: Int, node: SearchNode<[Int], Int>) throws -> [Int] {
         let sums: [Int] = computeSums(action: action)
         let state = node.getState()
+
+        // State is an array of Int, which is a value type. A shallow copy is sufficient
         var stateCpy = Array(state)
         
         for i in 0..<state.count {
@@ -97,6 +99,7 @@ At this point, since the problem is ready, the solution can be computed as follo
 ```
 DispatchQueue.main.async {
     let agent: ProblemSolvingAgent<[Int], Int> = ProblemSolvingAgent(strategy: BFS())
+
     guard let tmpSolutions = try? agent.solve(problem: LighthouseDialsProblem(initialState: [7,3,2,1])) else {
         // BFS never throws. No solution exists starting from the specified initial state if this branch is executed. Maybe log this info.
         return
