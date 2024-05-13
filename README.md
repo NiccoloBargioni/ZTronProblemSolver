@@ -96,7 +96,7 @@ At this point, since the problem is ready, the solution can be computed as follo
 
 ```
 DispatchQueue.main.async {
-    let agent = ProblemSolvingAgent<[Int], Int> = ProblemSolvingAgent(strategy: BFS())
+    let agent: ProblemSolvingAgent<[Int], Int> = ProblemSolvingAgent(strategy: BFS())
     guard let tmpSolutions = try? agent.solve(problem: LighthouseDialsProblem(initialState: [7,3,2,1])) else {
         // BFS never throws. No solution exists starting from the specified initial state if this branch is executed. Maybe log this info.
         return
