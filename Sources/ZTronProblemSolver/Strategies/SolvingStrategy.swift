@@ -1,6 +1,6 @@
 import Foundation
 
-public final class SolvingStrategy<State: Hashable, Action: Any> {
+public class SolvingStrategy<State: Hashable, Action: Any> {
 
     public init() {  }
 

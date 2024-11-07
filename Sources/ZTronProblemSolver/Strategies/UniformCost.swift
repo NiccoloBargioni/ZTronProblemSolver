@@ -24,3 +24,4 @@ public final class UniformCost<State: Hashable, Action: Any>: SolvingStrategy<St
     }
 
 }
+

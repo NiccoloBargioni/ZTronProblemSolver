@@ -7,7 +7,7 @@ public enum ComputationStatus: String, CaseIterable {
     case ERROR
 }
 
-public class ProblemSolvingAgent<State: Hashable, Action: Any>: ObservableObject {
+open class ProblemSolvingAgent<State: Hashable, Action: Any>: ObservableObject {
 
     @Published private var status: ComputationStatus
     private var strategy: SolvingStrategy<State, Action>
@@ -17,15 +17,15 @@ public class ProblemSolvingAgent<State: Hashable, Action: Any>: ObservableObject
         self.status = .READY
     }
 
-    public func getStatus() -> ComputationStatus {
+    open func getStatus() -> ComputationStatus {
         return self.status
     }
 
-    public func setStrategy(strategy: SolvingStrategy<State, Action>) {
+    open func setStrategy(strategy: SolvingStrategy<State, Action>) {
         self.strategy = strategy
     }
 
-    public func solve(problem: Problem<State, Action>) throws -> [Action]? {
+    open func solve(problem: Problem<State, Action>) throws -> [Action]? {
         var solution: [Action]?
         try self.strategy.reset()
 
