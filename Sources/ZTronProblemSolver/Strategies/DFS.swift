@@ -1,6 +1,6 @@
 import Foundation
 
-public class DFS<State: Hashable, Action: Any>: SolvingStrategy<State, Action> {
+public final class DFS<State: Hashable, Action: Any>: SolvingStrategy<State, Action> {
     private var frontier: LIFOFrontier<State, Action>
     private var explored: ExploredSet<State, Action>
 

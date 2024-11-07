@@ -1,6 +1,6 @@
 import Foundation
 
-public class UniformCost<State: Hashable, Action: Any>: SolvingStrategy<State, Action> {
+public final class UniformCost<State: Hashable, Action: Any>: SolvingStrategy<State, Action> {
     private var aStar: AStar<State, Action>
 
     override public init() {

@@ -1,6 +1,6 @@
 import Foundation
 
-public class AStar<State: Hashable, Action: Any>: SolvingStrategy<State, Action> {
+public final class AStar<State: Hashable, Action: Any>: SolvingStrategy<State, Action> {
     private var frontier: MinPQFrontier<State, Action>
     private var explored: ExploredSet<State, Action>
     private var heuristic: (SearchNode<State, Action>) -> Float
@@ -71,7 +71,7 @@ public class AStar<State: Hashable, Action: Any>: SolvingStrategy<State, Action>
         self.latestOptimalSolutionCost = nil
     }
 
-    func getOptimalSolutionCost() -> Float? {
+    public func getOptimalSolutionCost() -> Float? {
         return self.latestOptimalSolutionCost
     }
 }

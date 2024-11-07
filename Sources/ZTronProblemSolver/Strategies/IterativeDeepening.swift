@@ -1,6 +1,6 @@
 import Foundation
 
-public class IterativeDeepening<State: Hashable, Action: Any>: SolvingStrategy<State, Action> {
+public final class IterativeDeepening<State: Hashable, Action: Any>: SolvingStrategy<State, Action> {
     private var limit: Int
 
     public init(limit: Int = Int.max) {

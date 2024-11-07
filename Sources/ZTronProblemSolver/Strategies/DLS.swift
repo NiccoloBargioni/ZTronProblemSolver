@@ -4,7 +4,7 @@ enum DLSError {
     case DLSCutoffException(msg: String)
 }
 
-public class DLS<State: Hashable, Action: Any>: SolvingStrategy<State, Action> {
+public final class DLS<State: Hashable, Action: Any>: SolvingStrategy<State, Action> {
     private var limit: Int
 
     public init(limit: Int) {

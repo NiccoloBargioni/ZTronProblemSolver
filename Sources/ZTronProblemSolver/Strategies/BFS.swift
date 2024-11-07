@@ -1,6 +1,6 @@
 import Foundation
 
-public class BFS<State: Hashable, Action: Any>: SolvingStrategy<State, Action> {
+public final class BFS<State: Hashable, Action: Any>: SolvingStrategy<State, Action> {
     private var frontier: FIFOFrontier<State, Action>
     private var explored: ExploredSet<State, Action>
 
