@@ -19,7 +19,7 @@ public final class UniformCost<State: Hashable, Action: Any>: SolvingStrategy<St
         try self.aStar.reset()
     }
 
-    func getOptimalSolutionCost() -> Float? {
+    public func getOptimalSolutionCost() -> Float? {
         return self.aStar.getOptimalSolutionCost()
     }
 
