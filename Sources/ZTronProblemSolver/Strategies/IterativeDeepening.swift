@@ -9,6 +9,7 @@ public final class IterativeDeepening<State: Hashable, Action: Any>: SolvingStra
     }
 
     override func solve(problem: Problem<State, Action>) throws -> [Action]? {
+        guard !(try problem.isGoal(state: problem.getInitialState())) else { return [] }
 
         // swiftlint:disable identifier_name
         for i in 0..<limit {

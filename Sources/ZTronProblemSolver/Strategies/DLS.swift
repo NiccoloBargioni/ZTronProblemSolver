@@ -13,9 +13,12 @@ public final class DLS<State: Hashable, Action: Any>: SolvingStrategy<State, Act
     }
 
     override func solve(problem: Problem<State, Action>) throws -> [Action]? {
+        guard !(try problem.isGoal(state: problem.getInitialState())) else { return [] }
+
         let rootState = try problem.getInitialState()
         let rootNode = SearchNode<State, Action>.makeRootNode(initialState: rootState)
 
+        
         let result = try recursiveDLS(problem: problem, node: rootNode, limit: self.limit)
         return result.actions
     }

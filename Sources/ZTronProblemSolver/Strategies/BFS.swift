@@ -11,9 +11,14 @@ public final class BFS<State: Hashable, Action: Any>: SolvingStrategy<State, Act
     }
 
     override func solve(problem: Problem<State, Action>) throws -> [Action]? {
-        let root = SearchNode<State, Action>.makeRootNode(initialState: try problem.getInitialState())
-        try self.frontier.push(node: root)
+        guard !(try problem.isGoal(state: problem.getInitialState())) else {
+            return []
+        }
 
+        let root = SearchNode<State, Action>.makeRootNode(initialState: try problem.getInitialState())
+                
+        try self.frontier.push(node: root)
+        
         while try !self.frontier.isEmpty() {
             let nextNode = try self.frontier.next()
             let nextState = nextNode.getState()

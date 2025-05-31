@@ -30,11 +30,19 @@ open class ProblemSolvingAgent<State: Hashable, Action: Any>: ObservableObject {
         try self.strategy.reset()
 
         do {
-            self.status = .PENDING
+            Task(priority: .userInitiated) { @MainActor in
+                self.status = .PENDING
+            }
+            
             solution = try strategy.solve(problem: problem)
-            self.status = .COMPLETED
+            
+            Task(priority: .userInitiated) { @MainActor in
+                self.status = .COMPLETED
+            }
         } catch {
-            self.status = .ERROR
+            Task(priority: .userInitiated) { @MainActor in
+                self.status = .ERROR
+            }
         }
 
         return solution
